@@ -46,9 +46,11 @@ export const ExportCenter = () => {
     return date.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
   };
 
-  // Filter loads for selected month
+  // Filter loads for selected month and sort in ascending chronological order (01 to 31)
   const monthlyLoads = useMemo(() => {
-    return loads.filter(l => l.date && l.date.startsWith(selectedMonth));
+    return loads
+      .filter(l => l.date && l.date.startsWith(selectedMonth))
+      .sort((a, b) => (a.date || '').localeCompare(b.date || '') || (a.id || '').localeCompare(b.id || ''));
   }, [loads, selectedMonth]);
 
   // Compute Location Breakdown for selected month
