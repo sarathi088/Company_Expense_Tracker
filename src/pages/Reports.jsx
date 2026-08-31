@@ -13,6 +13,7 @@ import {
   ChevronRight,
   Sparkles
 } from 'lucide-react';
+import { formatDateDDMMYYYY } from '../lib/dateUtils';
 
 export const Reports = () => {
   const { loads, locations, settings, setActiveTab, addToast } = useApp();
@@ -317,7 +318,7 @@ export const Reports = () => {
                     <td className="py-3.5 px-3 font-extrabold text-slate-900 dark:text-white">
                       {settings.currency}{load.total.toLocaleString()}
                     </td>
-                    <td className="py-3.5 px-3 font-mono opacity-80">{load.date}</td>
+                    <td className="py-3.5 px-3 font-mono opacity-80">{formatDateDDMMYYYY(load.date)}</td>
                     <td className="py-3.5 px-3">
                       <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-slate-200/60 dark:bg-slate-800/80 text-slate-700 dark:text-slate-300">
                         {load.createdBy || 'Admin'}

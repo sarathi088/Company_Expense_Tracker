@@ -15,6 +15,7 @@ import {
 import { jsPDF } from 'jspdf';
 import 'jspdf-autotable';
 import * as XLSX from 'xlsx';
+import { formatDateDDMMYYYY } from '../lib/dateUtils';
 
 export const ExportCenter = () => {
   const { loads, locations, settings, addToast } = useApp();
@@ -168,7 +169,7 @@ export const ExportCenter = () => {
         if (includeRemarks) tableHead.push('Remarks');
 
         const tableBody = monthlyLoads.map(l => {
-          const row = [l.id, l.locationName, l.quantity, `Rs. ${l.rate}`, `Rs. ${l.total}`, l.date];
+          const row = [l.id, l.locationName, l.quantity, `Rs. ${l.rate}`, `Rs. ${l.total}`, formatDateDDMMYYYY(l.date)];
           if (includeRemarks) row.push(l.remarks || '—');
           return row;
         });
@@ -220,7 +221,7 @@ export const ExportCenter = () => {
       'Quantity': l.quantity,
       'Rate': l.rate,
       'Total Amount': l.total,
-      'Date': l.date,
+      'Date': formatDateDDMMYYYY(l.date),
       'Remarks': l.remarks || '',
       'Logged By': l.createdBy
     }));

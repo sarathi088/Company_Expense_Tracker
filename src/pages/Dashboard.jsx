@@ -14,6 +14,7 @@ import {
   ShieldAlert,
   Sparkles
 } from 'lucide-react';
+import { formatDateDDMMYYYY } from '../lib/dateUtils';
 
 export const Dashboard = () => {
   const { loads, locations, user, settings, setActiveTab, setIsAddLoadModalOpen } = useApp();
@@ -251,7 +252,7 @@ export const Dashboard = () => {
                     <td className="py-3 px-2 font-semibold">{load.quantity}</td>
                     <td className="py-3 px-2">₹{load.rate}</td>
                     <td className="py-3 px-2 font-bold text-slate-900 dark:text-white">₹{load.total.toLocaleString()}</td>
-                    <td className="py-3 px-2 opacity-80">{load.date}</td>
+                    <td className="py-3 px-2 opacity-80">{formatDateDDMMYYYY(load.date)}</td>
                   </tr>
                 ))}
               </tbody>

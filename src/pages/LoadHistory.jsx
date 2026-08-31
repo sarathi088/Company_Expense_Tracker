@@ -18,6 +18,7 @@ import {
   Check
 } from 'lucide-react';
 import * as XLSX from 'xlsx';
+import { formatDateDDMMYYYY } from '../lib/dateUtils';
 
 export const LoadHistory = () => {
   const { loads, locations, deleteLoad, editLoad, user, settings, addToast, setIsAddLoadModalOpen } = useApp();
@@ -74,7 +75,7 @@ export const LoadHistory = () => {
       l.quantity,
       l.rate,
       l.total,
-      l.date,
+      formatDateDDMMYYYY(l.date),
       `"${l.remarks || ''}"`,
       l.createdBy
     ]);
@@ -104,7 +105,7 @@ export const LoadHistory = () => {
       'Load Quantity': l.quantity,
       'Tariff Rate (₹)': l.rate,
       'Total Amount (₹)': l.total,
-      'Consignment Date': l.date,
+      'Consignment Date': formatDateDDMMYYYY(l.date),
       'Remarks': l.remarks || '',
       'Created By': l.createdBy
     }));
@@ -245,7 +246,7 @@ export const LoadHistory = () => {
                     <td className="py-3.5 px-3 font-extrabold text-slate-900 dark:text-white">
                       {settings.currency}{load.total.toLocaleString()}
                     </td>
-                    <td className="py-3.5 px-3 font-mono opacity-80">{load.date}</td>
+                    <td className="py-3.5 px-3 font-mono opacity-80">{formatDateDDMMYYYY(load.date)}</td>
                     <td className="py-3.5 px-3">
                       <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-slate-200/60 dark:bg-slate-800/80 text-slate-700 dark:text-slate-300">
                         {load.createdBy}
